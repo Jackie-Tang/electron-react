@@ -6,7 +6,8 @@
   "build": {
     "asar": false,
     "productName": "agroa",
-    "appId": "org.jackie.agroa",
+    "appId": "com.jackie.agroa",
+    "copyright": "Copyright © 2021",
     "directories": {
       "output": "build"
     },
@@ -36,12 +37,12 @@
     "serve-dev": "rimraf build && wait-on build/bundle.js && electron .",
     "dev": "cross-env NODE_ENV=development npm-run-all --parallel bundle serve-dev",
     "build": "cross-env NODE_ENV=production webpack --mode development",
-    "build:mac": "npm run build && electron-builder",
+    "build:mac": "npm run build && electron-builder --mac",
     "build:win": "npm run build && electron-builder --win --x64"
   },
-  "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
-  "repository": "pastahito/electron-react-webpack",
-  "license": "WTFPL",
+  "author": "Jackie<173.16340417@163.com>",
+  "repository": "Jackie-Tang/electron-react",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -69,12 +70,10 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "sass-loader": "^11.0.1",
-    "style-loader": "^2.0.0",
-    "update-electron-app": "^2.0.1"
+    "style-loader": "^2.0.0"
   },
   "agora_electron": {
     "electron_version": "10.2.0",
-    "prebuilt": true,
-    "arch": "x64"
+    "prebuilt": true
   }
 }

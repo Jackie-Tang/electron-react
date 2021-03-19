@@ -3,13 +3,10 @@ import { render } from 'react-dom'
 import AgoraRtcEngine from 'agora-electron-sdk'
 import path from 'path'
 import os from 'os'
-
-const {
+import {
   RtcTokenBuilder,
-  RtmTokenBuilder,
   RtcRole,
-  RtmRole,
-} = require('agora-access-token')
+} from 'agora-access-token';
 
 const APPID = 'bf16299f91e04f709516bb9a9e4b2235'
 const APPCERTIFICATE = '1ea9877e13a34e7193ff2fcee486f74e'

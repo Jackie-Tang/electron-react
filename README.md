@@ -14,7 +14,3 @@ Just run this command to start developing with hot reloading.
 ``` bash
 $ npm run dev
 ```
-
-## Related
-- [Agora-Electron-Vue](https://github.com/AgoraIO-Community/Agora-Electron-Quickstart/tree/master/Agora-Electron-Vue) -
-Minimal Electron template using Vue 2 instead of React.

@@ -1,0 +1,20 @@
+no context config found
+begin initialization...
+Create video stream channel for type : 0, uid :0
+
+duration : 2, tx :49594, rx :141041, txbr :0, rxbr :0, txAudioBr :0, rxAudioBr :0, users :1
+
+duration : 3, tx :108430, rx :144729, txbr :265, rxbr :16, txAudioBr :85, rxAudioBr :0, users :1
+
+duration : 3, tx :108430, rx :144729, txbr :265, rxbr :16, txAudioBr :0, rxAudioBr :0, users :1
+
+no context config found
+begin initialization...
+Create video stream channel for type : 0, uid :0
+
+duration : 2, tx :41109, rx :131009, txbr :0, rxbr :0, txAudioBr :0, rxAudioBr :0, users :1
+
+duration : 3, tx :70950, rx :134659, txbr :232, rxbr :28, txAudioBr :23, rxAudioBr :0, users :1
+
+duration : 3, tx :70950, rx :134659, txbr :232, rxbr :28, txAudioBr :0, rxAudioBr :0, users :1
+

@@ -4,17 +4,25 @@ import AgoraRtcEngine from 'agora-electron-sdk'
 import path from 'path'
 import os from 'os'
 
+const {
+  RtcTokenBuilder,
+  RtmTokenBuilder,
+  RtcRole,
+  RtmRole,
+} = require('agora-access-token')
 
 const APPID = 'bf16299f91e04f709516bb9a9e4b2235'
-const TOKEN =
-  '006bf16299f91e04f709516bb9a9e4b2235IAAoi8SZcfLVISpDKboIsbWoJFRWdypFyCtpvZyWyrfsyCMni+gAAAAAEADqgOQ98G5RYAEAAQDvblFg'
-
+const APPCERTIFICATE = '1ea9877e13a34e7193ff2fcee486f74e'
+const CHANNELNAME = 'demoChannel'
+const UID = Math.floor(new Date().getTime() / 1000)
+const ROLE = RtcRole.PUBLISHER
 export default class Agroa extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       isInit: false,
+      token: '',
     }
 
     this.rtcEngine = null
@@ -23,7 +31,29 @@ export default class Agroa extends Component {
     this.localVideoContainer = null
   }
 
-  initAgroa() {
+  async getToken() {
+    const expirationTimeInSeconds = 3600
+
+    const currentTimestamp = Math.floor(Date.now() / 1000)
+
+    const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds
+
+    const tokenA = await RtcTokenBuilder.buildTokenWithUid(
+      APPID,
+      APPCERTIFICATE,
+      CHANNELNAME,
+      UID,
+      ROLE,
+      privilegeExpiredTs
+    )
+
+    this.setState({
+      token: tokenA,
+    })
+    console.log('Token With Integer Number Uid: ' + tokenA)
+  }
+
+  async initAgroa() {
     if (global.rtcEngine) {
       global.rtcEngine.release()
       global.rtcEngine = null
@@ -33,6 +63,8 @@ export default class Agroa extends Component {
       alert('Please provide APPID in App.jsx')
       return
     }
+
+    await this.getToken();
 
     this.consoleContainer = document.querySelector('#console')
 
@@ -46,9 +78,13 @@ export default class Agroa extends Component {
 
       //setup render area for local user
       this.rtcEngine.setupLocalVideo(this.localVideoContainer)
-      const decive = this.rtcEngine.setAudioRecordingDevice(this.props.inputDevice);
-      console.log(decive, this.props.inputDevice, 'sss');
-      const enableLoopbackRecording = this.rtcEngine.enableLoopbackRecording(true)
+      const decive = this.rtcEngine.setAudioRecordingDevice(
+        this.props.inputDevice
+      )
+      console.log(decive, this.props.inputDevice, 'sss')
+      const enableLoopbackRecording = this.rtcEngine.enableLoopbackRecording(
+        true
+      )
 
       console.log(
         enableLoopbackRecording === 0 ? '声卡开启成功' : '声卡开启失败'
@@ -67,15 +103,17 @@ export default class Agroa extends Component {
       this.remoteVideoContainer = document.querySelector('#remote')
       this.rtcEngine.setupViewContentMode(uid, 1)
       this.rtcEngine.subscribe(uid, this.remoteVideoContainer)
-      
     })
 
     //  监听声音
-    this.rtcEngine.on('groupAudioVolumeIndication', (speakers, speakerNumber, totalVolume) => {
-      console.log('speakers-', speakers);
-      console.log('speakerNumber-', speakerNumber);
-      console.log('totalVolume-', totalVolume);
-    })
+    this.rtcEngine.on(
+      'groupAudioVolumeIndication',
+      (speakers, speakerNumber, totalVolume) => {
+        console.log('speakers-', speakers)
+        console.log('speakerNumber-', speakerNumber)
+        console.log('totalVolume-', totalVolume)
+      }
+    )
 
     // 设置频道场景 0-通信  1-直播  2-游戏
     this.rtcEngine.setChannelProfile(1)
@@ -91,19 +129,15 @@ export default class Agroa extends Component {
     // 设置日志文件
     this.rtcEngine.setLogFile(logpath)
 
-     // 启用说话者音量提示
-    this.rtcEngine.enableAudioVolumeIndication(5000,3);
+    // 启用说话者音量提示
+    this.rtcEngine.enableAudioVolumeIndication(5000, 3)
+
+    const { token } = this.state;
 
     // 加入频道 参数（token, 频道, (非必选项) 开发者需加入的任何附加信息, uid）
-    this.rtcEngine.joinChannel(
-      TOKEN,
-      'demoChannel',
-      null,
-      Math.floor(new Date().getTime() / 1000)
-    )
+    this.rtcEngine.joinChannel(token, CHANNELNAME, null, UID)
 
-    global.rtcEngine = this.rtcEngine;
-
+    global.rtcEngine = this.rtcEngine
   }
 
   levelChannel() {
@@ -113,12 +147,12 @@ export default class Agroa extends Component {
         isInit: isLevel != 0,
       },
       () => {
-        this.consoleContainer.innerHTML = '';
+        this.consoleContainer.innerHTML = ''
         // this.remoteVideoContainer.innerHTML = '';
-        this.localVideoContainer.innerHTML = '';
+        this.localVideoContainer.innerHTML = ''
       }
     )
-    console.log(isLevel);
+    console.log(isLevel)
     console.log(isLevel === 0 ? '断线成功' : '断线失败')
   }
 
@@ -132,7 +166,7 @@ export default class Agroa extends Component {
 
   render() {
     const { isInit } = this.state
-    console.log(isInit, 'ssssssssss');
+    console.log(isInit, 'ssssssssss')
 
     return (
       <div>

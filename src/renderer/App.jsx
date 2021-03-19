@@ -18,7 +18,6 @@ export default class App extends Component {
       ready: false,
     }
   }
-  componentDidMount() {}
 
   lintAgroa() {
     if (global.rtcEngine) {

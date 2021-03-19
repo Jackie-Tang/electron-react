@@ -1,38 +1,79 @@
 {
-  "name": "electron-react",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+  "name": "electron-react-webpack",
+  "version": "1.0.0",
+  "description": "Electron + React 16 + Webpack 4 template.",
+  "main": "main.js",
+  "build": {
+    "asar": false,
+    "productName": "agroa",
+    "appId": "org.jackie.agroa",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "build/**/*",
+      "main.js",
+      "index.html",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "hardenedRuntime": false,
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "bundle": "webpack --mode development",
+    "serve": "electron .",
+    "serve-dev": "rimraf build && wait-on build/bundle.js && electron .",
+    "dev": "cross-env NODE_ENV=development npm-run-all --parallel bundle serve-dev",
+    "build": "cross-env NODE_ENV=production webpack --mode development",
+    "build:mac": "npm run build && electron-builder",
+    "build:win": "npm run build && electron-builder --win --x64"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "author": "J. Renato Ramos González <renato.etc.etc.etc@gmail.com>",
+  "repository": "pastahito/electron-react-webpack",
+  "license": "WTFPL",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "cross-env": "^6.0.3",
+    "css-loader": "^0.28.10",
+    "electron": "10.2.0",
+    "electron-builder": "22.6.1",
+    "electron-reload": "^1.2.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.10",
+    "npm-run-all": "^4.1.2",
+    "rimraf": "^3.0.0",
+    "wait-on": "^3.3.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^3.1.1"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "agora-electron-sdk": "3.3.1",
+    "inline-worker": "^1.1.0",
+    "node-sass": "^5.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "update-electron-app": "^2.0.1"
+  },
+  "agora_electron": {
+    "electron_version": "10.2.0",
+    "prebuilt": true,
+    "arch": "x64"
   }
 }

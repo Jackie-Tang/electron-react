@@ -1,0 +1,38 @@
+.selectDevice {
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+}
+
+.errorTip {
+  padding: 20px 30px;
+  color: red;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+select {
+  width: 160px;
+}
+button {
+  height: 30px;
+  margin: 20px 0 0 30px;
+}
+.errorTip {
+  padding: 20px 30px;
+}
+.waveWrap {
+  width: 200px;
+  padding: 20px 0 0 20px;
+}
+.waveWrap .item {
+  display: inline-block;
+  width: 10px;
+  margin: 0 5px;
+  vertical-align: middle;
+  background-color: #1890ff;
+}

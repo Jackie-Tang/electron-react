@@ -1,0 +1,9 @@
+{
+  "presets": [
+    "react"
+  ],
+  //上面那一块如果有写可以省略
+  "plugins": [
+    "babel-plugin-transform-class-properties",
+  ]
+}

@@ -7,7 +7,6 @@
     "asar": false,
     "productName": "agroa",
     "appId": "com.jackie.agroa",
-    "copyright": "Copyright © 2021",
     "directories": {
       "output": "build"
     },
@@ -18,7 +17,6 @@
       "node_modules/**/*"
     ],
     "mac": {
-      "hardenedRuntime": false,
       "target": [
         "dmg",
         "zip"
@@ -52,7 +50,7 @@
     "cross-env": "^6.0.3",
     "css-loader": "^0.28.10",
     "electron": "10.2.0",
-    "electron-builder": "22.6.1",
+    "electron-builder": "22.10.5",
     "electron-reload": "^1.2.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.10",

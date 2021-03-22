@@ -24,6 +24,8 @@ jobs:
        
       - name: 安装依赖 # 使用yarn 安装依赖
         run: yarn
+      - name: 跳过验证
+        run: export CSC_IDENTITY_AUTO_DISCOVERY=false
       - name: 编译部署ui
         run: yarn build:mac
       - name: Read package.json

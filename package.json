@@ -2,6 +2,7 @@
   "name": "electron-react-webpack",
   "version": "1.0.0",
   "description": "Electron + React 16 + Webpack 4 template.",
+  "repository": "https://github.com/Jackie-Tang/electron-react",
   "main": "main.js",
   "build": {
     "asar": false,
@@ -10,6 +11,13 @@
     "directories": {
       "output": "build"
     },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Jackie-Tang",
+        "repo": "electron-react"
+      }
+    ],
     "files": [
       "build/**/*",
       "main.js",
@@ -35,11 +43,12 @@
     "serve-dev": "rimraf build && wait-on build/bundle.js && electron .",
     "dev": "cross-env NODE_ENV=development npm-run-all --parallel bundle serve-dev",
     "build": "cross-env NODE_ENV=production webpack --mode development",
-    "build:mac": "npm run build && electron-builder --mac",
+    "dist": "electron-builder",
+    "build:mac": "npm run build && npm run dist",
+    "publish": "builder --mac --win -p always",
     "build:win": "npm run build && electron-builder --win --x64"
   },
   "author": "Jackie<173.16340417@163.com>",
-  "repository": "Jackie-Tang/electron-react",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -63,6 +72,8 @@
   "dependencies": {
     "agora-access-token": "^2.0.4",
     "agora-electron-sdk": "3.3.1",
+    "electron-log": "^4.3.2",
+    "electron-updater": "^4.3.8",
     "inline-worker": "^1.1.0",
     "node-sass": "^5.0.0",
     "react": "^16.2.0",

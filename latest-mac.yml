@@ -1,12 +1,12 @@
-version: 1.0.0
+version: 1.0.1
 files:
-  - url: agroa-1.0.0-mac.zip
-    sha512: eIE1xyL30RhMHYvOw3QnzJCwW9Z+6arj8tdheduZE54RRwzmxqfk2RjcnN8jJ6asmzBBa6Y2HkZzAS1kdOE3Vw==
-    size: 188190221
-    blockMapSize: 189222
-  - url: agroa-1.0.0.dmg
-    sha512: ItrMlnmRXfjyzCZiICb1TAouXrP28bA0p1WPxnNWC08dieJiPpFTslKzhkXTIYzuZrLWQEwjdmcRpgNw6hNRNQ==
-    size: 192077833
-path: agroa-1.0.0-mac.zip
-sha512: eIE1xyL30RhMHYvOw3QnzJCwW9Z+6arj8tdheduZE54RRwzmxqfk2RjcnN8jJ6asmzBBa6Y2HkZzAS1kdOE3Vw==
-releaseDate: '2021-03-22T09:52:50.571Z'
+  - url: agroa-1.0.1-mac.zip
+    sha512: LlDz+gcGtfPNbll9cRWSiTEWElzlLNJvL++8Cpd38kW2sUvG4l/4T61779OY1xSXce5BU85/TDO2wimeYAURdA==
+    size: 188190183
+    blockMapSize: 189176
+  - url: agroa-1.0.1.dmg
+    sha512: eHVv4jsqv6S9B9WYEO+57MvDvqRJ6Pgzrs/geVs6U0KOCNxWQqz//f149j2ntIorC+r4cQhmIG1SG4kN79l8GA==
+    size: 192078257
+path: agroa-1.0.1-mac.zip
+sha512: LlDz+gcGtfPNbll9cRWSiTEWElzlLNJvL++8Cpd38kW2sUvG4l/4T61779OY1xSXce5BU85/TDO2wimeYAURdA==
+releaseDate: '2021-03-22T09:54:40.065Z'

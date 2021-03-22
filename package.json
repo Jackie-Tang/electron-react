@@ -1,6 +1,6 @@
 {
   "name": "electron-react-webpack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Electron + React 16 + Webpack 4 template.",
   "repository": "https://github.com/Jackie-Tang/electron-react",
   "main": "main.js",

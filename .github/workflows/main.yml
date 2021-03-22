@@ -1,13 +1,13 @@
 name: CI
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
-  build-test:
+  build-mac:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macOS-latest, ubuntu-18.04]
+        os: [macOS-latest]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
@@ -15,24 +15,8 @@ jobs:
           node-version: 10.x
       - name: CI
         run: |
-          if [[ "$OSTYPE" == "linux-gnu" ]]; then
-            export DISPLAY=:99.0
-            Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-          fi
-          npm i -g xvfb-maybe
-          yarn
-          cd npm-package && yarn && cd ..
-          yarn build:mac
-  build-test-windows:
-    runs-on: windows-2019
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10.x
-      - name: CI
-        shell: bash
-        run: |
+          export CSC_IDENTITY_AUTO_DISCOVERY=false
+          export GH_TOKEN="19e114fb699bd0f3e69dc2d03035539001e5b4b9"
           yarn
           cd npm-package && yarn && cd ..
           yarn build:mac

@@ -27,6 +27,8 @@ jobs:
       - name: 跳过验证
         run: export CSC_IDENTITY_AUTO_DISCOVERY=false
       - name: 编译部署ui
+        env:
+          GH_TOKEN: 19e114fb699bd0f3e69dc2d03035539001e5b4b9
         run: yarn build:mac
       - name: Read package.json
         uses: tyankatsu0105/read-package-version-actions@v1

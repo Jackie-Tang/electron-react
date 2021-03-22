@@ -1,52 +1,41 @@
-const { dialog } = require('electron')
 const { autoUpdater } = require('electron-updater')
-
-let updater
-autoUpdater.autoDownload = false
-
-autoUpdater.on('error', (error) => {
-  dialog.showErrorBox('Error: ', error == null ? "unknown" : (error.stack || error).toString())
+const Store = require('electron-store')
+const path = require('path')
+global.store = new Store()
+autoUpdater.logger = require('electron-log')
+// 监听输出的日志
+autoUpdater.logger.transports.file.level = 'info'
+// 设置当前的版本号为自动更新的版本号
+global.currentVersion = autoUpdater.currentVersion
+autoUpdater.autoDownload = false // 将自动下载包设置为false，产品的需求是让用户自己点击更新下载
+// 监听自动更新的几个事件
+// 监听如果自动更新失败将停止安装
+autoUpdater.on('error', () => {
+  // todo something
 })
-
-autoUpdater.on('update-available', () => {
-  dialog.showMessageBox({
-    type: 'info',
-    title: 'Found Updates',
-    message: 'Found updates, do you want update now?',
-    buttons: ['Sure', 'No']
-  }, (buttonIndex) => {
-    if (buttonIndex === 0) {
-      autoUpdater.downloadUpdate()
+// 检查更新是否已开始时发出
+autoUpdater.on('checking-for-update', () => { })
+// 检测有可更新的应用包
+autoUpdater.on('update-available', info => {
+  // todo something
+})
+// 检测没有可用更新时发出
+autoUpdater.on('update-not-available', info => {
+  // todo something
+})
+// 下载可更新的安装包
+autoUpdater.on('update-downloaded', info => {
+  // todo something
+})
+// 监听下载进度
+autoUpdater.on('download-progress', info => {
+  // todo something
+})
+module.exports = {
+  checkVersion() {
+    if (global.isDev) {
+      autoUpdater.updateConfigPath = path.join(__dirname, '../../dev-app-update.yml')
     }
-    else {
-      updater.enabled = true
-      updater = null
-    }
-  })
-})
-
-autoUpdater.on('update-not-available', () => {
-  dialog.showMessageBox({
-    title: 'No Updates',
-    message: 'Current version is up-to-date.'
-  })
-  updater.enabled = true
-  updater = null
-})
-
-autoUpdater.on('update-downloaded', () => {
-  dialog.showMessageBox({
-    title: 'Install Updates',
-    message: 'Updates downloaded, application will be quit for update...'
-  }, () => {
-    setImmediate(() => autoUpdater.quitAndInstall())
-  })
-})
-
-// export this to MenuItem click callback
-const checkForUpdates = (menuItem, focusedWindow, event) => {
-  // updater=menuItem;
-  // updater.enabled=false;
-  autoUpdater.checkForUpdates()
+    autoUpdater.checkForUpdates()
+  }
 }
-module.exports.checkForUpdates = checkForUpdates

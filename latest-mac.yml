@@ -1,0 +1,12 @@
+version: 1.0.0
+files:
+  - url: agroa-1.0.0-mac.zip
+    sha512: WU+ld+O/rQtUyW8VopqKcvOPl/AAkDlFtdU7/A1WHMi/v4jCuNJR9Gw3DokN3GEcCSKTT3Jf1mRBNov1dfwdaw==
+    size: 188190166
+    blockMapSize: 189167
+  - url: agroa-1.0.0.dmg
+    sha512: v6PGBxepTSlCPNT0efyEer/y95qyJYa4CNeJyL4uPgxGrmFcwA3Rmky8p8S16Jyhu80SvAdGsxt/LGR4ciPu1A==
+    size: 192078558
+path: agroa-1.0.0-mac.zip
+sha512: WU+ld+O/rQtUyW8VopqKcvOPl/AAkDlFtdU7/A1WHMi/v4jCuNJR9Gw3DokN3GEcCSKTT3Jf1mRBNov1dfwdaw==
+releaseDate: '2021-03-22T09:47:42.337Z'

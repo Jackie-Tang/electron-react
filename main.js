@@ -3,7 +3,7 @@ const electron = require('electron')
 const { app, BrowserWindow } = electron
 const { format } = require('url')
 const path = require('path')
-// const { checkForUpdates } = require('./updater');
+// const AppUpdater = require('./updater');
 const { autoUpdater } = require('electron-updater');
 
 const isDevelopment = process.env["NODE_ENV"] === "development"
@@ -51,12 +51,19 @@ app.on('ready', () => {
         // otherWindow.loadURL(`file://${__dirname}/index.html`)
     } else {
         // checkForUpdates();
-        autoUpdater.checkForUpdatesAndNotify()
+        autoUpdater.checkForUpdatesAndNotify();
+        autoUpdater.logger = require('electron-log')
+        // 监听输出的日志
+        autoUpdater.logger.transports.file.level = 'info'
+        // global.currentVersion = autoUpdater.currentVersion
         mainWindow.loadURL(format({
             pathname: path.join(__dirname, 'index.html'),
             protocol: 'file',
             slashes: true
         }))
+        // mainWindow.webContents.on('did-finish-load', () => {
+        //     AppUpdater.checkVersion()
+        // })
 
         // otherWindow.loadURL(format({
         //     pathname: path.join(__dirname, 'index.html'),

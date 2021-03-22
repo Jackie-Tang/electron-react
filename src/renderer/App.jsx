@@ -92,6 +92,7 @@ export default class App extends Component {
 
     return (
       <div className="home">
+        <p>版本1.0.0</p>
         <SelectDevice
           changeDevice={this.changeDevice.bind(this)}
           changeReady={this.changeReady.bind(this)}

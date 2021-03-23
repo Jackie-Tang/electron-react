@@ -40,7 +40,7 @@ jobs:
         run: |
             yarn build:mac
         env:
-          GH_TOKEN: 6615fd0e71574b8e49db2268775692e423f77dbe
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # step5: cleanup artifacts in dist_electron
 #       - name: cleanup artifacts for macosZ

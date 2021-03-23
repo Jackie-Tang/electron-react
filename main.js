@@ -42,7 +42,7 @@ app.on('ready', () => {
     // })
 
     // if (isDevelopment) {
-    console.log(MacUpdater)
+    console.log('process.env.GITHUB_TOKEN', process.env.GITHUB_TOKEN)
     mainWindow.openDevTools()
     // otherWindow.openDevTools()
     // }
@@ -56,7 +56,7 @@ app.on('ready', () => {
             "provider": "github",
             "owner": "Jackie-Tang",
             "repo": "electron-react",
-            token: process.env.RELEASE_TOKEN
+            token: process.env.GITHUB_TOKEN
         })
         xxx.checkForUpdatesAndNotify();
         xxx.logger = require('electron-log')

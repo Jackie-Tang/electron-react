@@ -38,7 +38,7 @@ jobs:
       # step4: build app for mac/win
       - name: build mac app
         run: |
-            cross-env RELEASE_TOKEN=${{ secrets.GH_TOKEN }} yarn build:mac
+            yarn build:mac
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 

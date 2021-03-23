@@ -2,12 +2,12 @@
   "name": "electron-react-webpack",
   "version": "1.0.1",
   "description": "Electron + React 16 + Webpack 4 template.",
-  "repository": "https://github.com/Jackie-Tang/electron-react",
+  "repository": "https://github.com/Jackie-Tang/electron-react.git",
   "main": "main.js",
   "build": {
     "asar": false,
     "productName": "agroa",
-    "appId": "com.jackie.agroa",
+    "appId": "org.jackie.agroa",
     "directories": {
       "output": "build"
     },

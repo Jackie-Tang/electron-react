@@ -1,13 +1,13 @@
 {
   "name": "electron-react-webpack",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Electron + React 16 + Webpack 4 template.",
   "repository": "https://github.com/Jackie-Tang/electron-react.git",
   "main": "main.js",
   "build": {
     "asar": false,
     "productName": "agroa",
-    "appId": "org.jackie.agroa",
+    "appId": "com.jackie.agroa",
     "directories": {
       "output": "build"
     },
@@ -41,9 +41,9 @@
     "bundle": "webpack --mode development",
     "serve": "electron .",
     "serve-dev": "rimraf build && wait-on build/bundle.js && electron .",
-    "dev": "cross-env NODE_ENV=development npm-run-all --parallel bundle serve-dev",
+    "dev": "cross-env NODE_ENV=development GH_TOKEN=1111 npm-run-all --parallel bundle serve-dev",
     "build": "cross-env NODE_ENV=production webpack --mode development",
-    "build:mac": "npm run build && electron-builder --mac --publish=always",
+    "build:mac": "npm run build && electron-builder --mac",
     "package:mac": "npm run build && electron-builder --publish=always",
     "build:win": "npm run build && electron-builder --win --x64"
   },

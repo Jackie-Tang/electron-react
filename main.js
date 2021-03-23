@@ -4,7 +4,7 @@ const { app, BrowserWindow } = electron
 const { format } = require('url')
 const path = require('path')
 // const AppUpdater = require('./updater');
-const { autoUpdater } = require('electron-updater');
+const { autoUpdater, MacUpdater } = require('electron-updater');
 
 const isDevelopment = process.env["NODE_ENV"] === "development"
 // Let electron reloads by itself when webpack watches changes in ./app/
@@ -42,6 +42,7 @@ app.on('ready', () => {
     // })
 
     // if (isDevelopment) {
+    console.log(MacUpdater)
     mainWindow.openDevTools()
     // otherWindow.openDevTools()
     // }
@@ -51,10 +52,16 @@ app.on('ready', () => {
         // otherWindow.loadURL(`file://${__dirname}/index.html`)
     } else {
         // checkForUpdates();
-        autoUpdater.checkForUpdatesAndNotify();
-        autoUpdater.logger = require('electron-log')
+        const xxx = new MacUpdater({
+            "provider": "github",
+            "owner": "Jackie-Tang",
+            "repo": "electron-react",
+            token: process.env.RELEASE_TOKEN
+        })
+        xxx.checkForUpdatesAndNotify();
+        xxx.logger = require('electron-log')
         // 监听输出的日志
-        autoUpdater.logger.transports.file.level = 'info'
+        xxx.logger.transports.file.level = 'info'
         // global.currentVersion = autoUpdater.currentVersion
         mainWindow.loadURL(format({
             pathname: path.join(__dirname, 'index.html'),

@@ -2,8 +2,8 @@ name: Build/release
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches: 
+    - master
 
 jobs:
   release:
@@ -25,5 +25,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.github_token }}
         run: |
+          npm i -g nrm
+          nrm use taobao
           yarn
           yarn build:mac

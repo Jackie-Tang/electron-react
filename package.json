@@ -45,7 +45,7 @@
     "build": "cross-env NODE_ENV=production webpack --mode development",
     "dist": "electron-builder",
     "build:mac": "npm run build && npm run dist",
-    "publish": "builder --mac --win -p always",
+    "package:mac": "npm run build && electron-builder --publish=always",
     "build:win": "npm run build && electron-builder --win --x64"
   },
   "author": "Jackie<173.16340417@163.com>",

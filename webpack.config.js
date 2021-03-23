@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack')
 const isProduction = process.env["NODE_ENV"] === "production"
 const path = require('path')
 
@@ -54,6 +55,9 @@ module.exports = {
             filename: 'bundle.css',
             disable: false,
             allChunks: true
+        }),
+        new webpack.DefinePlugin({
+            'process.env.GH_TOKEN': JSON.stringify(process.env.GH_TOKEN)
         })
     ],
 

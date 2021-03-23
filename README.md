@@ -14,5 +14,3 @@ Just run this command to start developing with hot reloading.
 ``` bash
 $ npm run dev
 ```
-
-<!-- export GH_TOKEN="1e539b94eb85503acc96bf478821bd899a9bb305" -->

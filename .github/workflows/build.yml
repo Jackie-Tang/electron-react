@@ -33,12 +33,12 @@ jobs:
       # step3: npm install
       - name: npm install
         run: |
-          npm install
+          yarn
 
       # step4: build app for mac/win
       - name: build mac app
         run: |
-            npm run build && npm run dist
+            yarn package:mac
         env:
           GH_TOKEN: 19e114fb699bd0f3e69dc2d03035539001e5b4b9
 

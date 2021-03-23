@@ -43,7 +43,7 @@
     "serve-dev": "rimraf build && wait-on build/bundle.js && electron .",
     "dev": "cross-env NODE_ENV=development npm-run-all --parallel bundle serve-dev",
     "build": "cross-env NODE_ENV=production webpack --mode development",
-    "build:mac": "npm run build && electron-builder --mac",
+    "build:mac": "npm run build && electron-builder --mac --publish=always",
     "package:mac": "npm run build && electron-builder --publish=always",
     "build:win": "npm run build && electron-builder --win --x64"
   },

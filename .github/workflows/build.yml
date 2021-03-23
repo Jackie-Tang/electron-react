@@ -18,7 +18,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-10.15]
+        os: [windows-2019]
+        # os: [macos-10.15]
 
     # create steps
     steps:
@@ -34,31 +35,39 @@ jobs:
       - name: npm install
         run: |
           yarn
-
-      # step4: build app for mac/win
-      - name: build mac app
+      - name: build win app
         run: |
-            yarn package:mac
+          yarn build:win
         env:
           GH_TOKEN: 19e114fb699bd0f3e69dc2d03035539001e5b4b9
+
+      # step4: build app for mac/win
+      # - name: build mac app
+      #   run: |
+      #       yarn package:mac
+      #   env:
+      #     GH_TOKEN: 19e114fb699bd0f3e69dc2d03035539001e5b4b9
 
       # step5: cleanup artifacts in dist_electron
 #       - name: cleanup artifacts for macosZ
 #         run: |
 #           npx rimraf "build/!(*.dmg)"
+        - name: cleanup artifacts for windows
+        run: |
+          npx rimraf "build/win-unpacked/!(*.exe)"
 
 #       # step6: upload artifacts
-#       - name: upload artifacts
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: ${{ matrix.os }}
-#           path: build
+      - name: upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}
+          path: build/win-unpacked
 
 #       # step7: create release
-#       - name: release
-#         uses: softprops/action-gh-release@v1
-#         if: startsWith(github.ref, 'refs/tags/')
-#         with:
-#           files: "build/**"
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: "build/win-unpacked/**"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

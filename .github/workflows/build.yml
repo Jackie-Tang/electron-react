@@ -38,7 +38,7 @@ jobs:
       # step4: build app for mac/win
       - name: build mac app
         run: |
-          npm run electron:build
+            npm run build && npm run dist
         env:
           GH_TOKEN: 19e114fb699bd0f3e69dc2d03035539001e5b4b9
 

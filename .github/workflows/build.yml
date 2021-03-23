@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-2019]
+        os: [macos-10.15]
 
     steps:
       - name: Check out Git repository
@@ -23,7 +23,7 @@ jobs:
           node-version: 10
       - name: Build/release Electron app
         env:
-          GH_TOKEN: ${{ secrets.github_token }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm i -g nrm
           nrm use taobao

@@ -40,7 +40,24 @@ jobs:
         run: |
           yarn
 
-      
+      # step4: build app for mac/win
+      - name: build mac app
+        run: |
+            yarn build:mac --publish=always
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # step5: cleanup artifacts in dist_electron
+      # - name: cleanup artifacts for macosZ
+      #   run: |
+      #     npx rimraf "build/!(*.dmg)"
+
+#       # step6: upload artifacts
+      # - name: upload artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: ${{ matrix.os }}
+      #     path: build
 
 
       # - name: Read package.json
@@ -61,8 +78,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          tag_name: ${{ steps.package-version.outputs.version }}
-          release_name: ${{ steps.package-version.outputs.version }}
+          tag_name: v${{ steps.package-version.outputs.version }}
+          release_name: v${{ steps.package-version.outputs.version }}
           prerelease: true # 是否为预发布版本
           files: "build/**"
         
@@ -73,22 +90,3 @@ jobs:
       #     files: "build/**"
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      # step4: build app for mac/win
-      - name: build mac app
-        run: |
-            yarn build:mac --publish=always
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      # step5: cleanup artifacts in dist_electron
-      - name: cleanup artifacts for macosZ
-        run: |
-          npx rimraf "build/!(*.dmg)"
-
-#       # step6: upload artifacts
-      - name: upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ matrix.os }}
-          path: build

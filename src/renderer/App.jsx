@@ -5,7 +5,7 @@ import path from 'path'
 import os from 'os'
 import SelectDevice from './components/selectDevice'
 import Agroa from './components/agroa'
-
+const { ipcRenderer } = require('electron')
 const APPID = '0ea43917eae94e909864e344db8e2371'
 
 export default class App extends Component {
@@ -16,7 +16,34 @@ export default class App extends Component {
       inputDevice: '',
       outputDevice: '',
       ready: false,
+      version: '',
+      message: '',
     }
+  }
+
+  componentDidMount() {
+    ipcRenderer.send('app_version')
+    ipcRenderer.on('app_version', (event, arg) => {
+      ipcRenderer.removeAllListeners('app_version')
+      this.setState({
+        version: arg.version,
+      })
+    })
+    ipcRenderer.on('update_available', () => {
+      ipcRenderer.removeAllListeners('update_available')
+      const message = 'A new update is available. Downloading now...'
+      this.setState({
+        message,
+      })
+    })
+    ipcRenderer.on('update_downloaded', () => {
+      ipcRenderer.removeAllListeners('update_downloaded')
+      const message =
+        'Update Downloaded. It will be installed on restart. Restart now?'
+      this.setState({
+        message,
+      })
+    })
   }
 
   lintAgroa() {
@@ -88,11 +115,12 @@ export default class App extends Component {
   }
 
   render() {
-    const { inputDevice, outputDevice, ready } = this.state
+    const { inputDevice, outputDevice, ready, version, message } = this.state
 
     return (
       <div className="home">
-        <p>版本：1.0.0</p>
+        <p>版本：{version}</p>
+        <p>{message}</p>
         <SelectDevice
           changeDevice={this.changeDevice.bind(this)}
           changeReady={this.changeReady.bind(this)}

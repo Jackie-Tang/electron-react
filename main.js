@@ -1,17 +1,16 @@
 // Basic init
 const electron = require('electron')
-const { app, BrowserWindow } = electron
+const { app, BrowserWindow, ipcMain } = electron
 const { format } = require('url')
 const path = require('path')
 const { Base64 } = require('js-base64');
 // const AppUpdater = require('./updater');
-const { autoUpdater, MacUpdater } = require('electron-updater');
+const { MacUpdater } = require('electron-updater');
 
 const isDevelopment = process.env["NODE_ENV"] === "development"
-// Let electron reloads by itself when webpack watches changes in ./app/
+
 if (isDevelopment) {
-    //only load reload module in dev mode
-    require('electron-reload')(path.join(__dirname, "src"))
+	require('electron-reload')(path.join(__dirname, "src"))
 } else {
 
 }
@@ -19,68 +18,67 @@ if (isDevelopment) {
 
 // To avoid being garbage collected
 let mainWindow
-let otherWindow
 
-// app.allowRendererProcessReuse = false
 app.allowRendererProcessReuse = false
 
+
+function createWindow() {
+	mainWindow = new BrowserWindow({
+		width: 800,
+		height: 600,
+		webPreferences: {
+			nodeIntegration: true,
+		},
+	});
+	mainWindow.openDevTools()
+	if (isDevelopment) {
+		mainWindow.loadURL(`file://${__dirname}/index.html`)
+	} else {
+		mainWindow.once('ready-to-show', () => {
+			console.log('autoUpdater')
+			const autoUpdater = new MacUpdater({
+				provider: "github",
+				owner: "Jackie-Tang",
+				repo: "electron-react",
+				vPrefixedTagName: false,
+				releaseType: 'release',
+				token: Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA==')
+			})
+			autoUpdater.logger = require('electron-log')
+			// 监听输出的日志
+			autoUpdater.logger.transports.file.level = 'info'
+			autoUpdater.checkForUpdatesAndNotify();
+			autoUpdater.on('update-available', () => {
+				mainWindow.webContents.send('update_available');
+			});
+			autoUpdater.on('update-downloaded', () => {
+				mainWindow.webContents.send('update_downloaded');
+			});
+		});
+		mainWindow.loadURL(format({
+			pathname: path.join(__dirname, 'index.html'),
+			protocol: 'file',
+			slashes: true
+		}))
+	}
+	mainWindow.on('closed', function () {
+		mainWindow = null;
+	});
+}
+
 app.on('ready', () => {
+	console.log('process.env.GITHUB_TOKEN', Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA=='))
 
-    mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true
-        }
-    })
-
-    // otherWindow = new BrowserWindow({
-    //     width: 800,
-    //     height: 600,
-    //     webPreferences:{
-    //         nodeIntegration: true
-    //     }
-    // })
-
-    // if (isDevelopment) {
-    console.log('process.env.GITHUB_TOKEN', Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA=='))
-    mainWindow.openDevTools()
-    // otherWindow.openDevTools()
-    // }
-
-    if (isDevelopment) {
-        mainWindow.loadURL(`file://${__dirname}/index.html`)
-        // otherWindow.loadURL(`file://${__dirname}/index.html`)
-    } else {
-        // checkForUpdates();
-        const xxx = new MacUpdater({
-            provider: "github",
-            owner: "Jackie-Tang",
-            repo: "electron-react",
-            vPrefixedTagName: false,
-            releaseType: 'draft',
-            token: Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA==')
-        })
-        
-        xxx.logger = require('electron-log')
-        // 监听输出的日志
-        xxx.logger.transports.file.level = 'info'
-        xxx.checkForUpdatesAndNotify();
-        // global.currentVersion = autoUpdater.currentVersion
-        mainWindow.loadURL(format({
-            pathname: path.join(__dirname, 'index.html'),
-            protocol: 'file',
-            slashes: true
-        }))
-        // mainWindow.webContents.on('did-finish-load', () => {
-        //     AppUpdater.checkVersion()
-        // })
-
-        // otherWindow.loadURL(format({
-        //     pathname: path.join(__dirname, 'index.html'),
-        //     protocol: 'file',
-        //     slashes: true
-        // }))
-    }
+	createWindow();
 
 })
+
+app.on('activate', function () {
+	if (mainWindow === null) {
+		createWindow();
+	}
+});
+
+ipcMain.on('app_version', (event) => {
+	event.sender.send('app_version', { version: app.getVersion() });
+});

@@ -60,11 +60,16 @@ jobs:
           path: build
 
 
+      # - name: Read package.json
+      #   uses: tyankatsu0105/read-package-version-actions@v1
+      #   with:
+      #     path: './package/vitevui'
+      #   id: package-version
+
       - name: Read package.json
         uses: tyankatsu0105/read-package-version-actions@v1
-        with:
-          path: './package/vitevui'
         id: package-version
+
 
 #       # step7: create release
       - name: Create Release for Tag

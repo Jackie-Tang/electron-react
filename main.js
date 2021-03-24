@@ -57,7 +57,8 @@ app.on('ready', () => {
             provider: "github",
             owner: "Jackie-Tang",
             repo: "electron-react",
-            // vPrefixedTagName: false,
+            vPrefixedTagName: false,
+            releaseType: 'draft',
             token: Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA==')
         })
         

@@ -3,6 +3,7 @@ const electron = require('electron')
 const { app, BrowserWindow } = electron
 const { format } = require('url')
 const path = require('path')
+const { Base64 } = require('js-base64');
 // const AppUpdater = require('./updater');
 const { autoUpdater, MacUpdater } = require('electron-updater');
 
@@ -42,7 +43,7 @@ app.on('ready', () => {
     // })
 
     // if (isDevelopment) {
-    console.log('process.env.GITHUB_TOKEN', process.env.GH_TOKEN)
+    console.log('process.env.GITHUB_TOKEN', Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA=='))
     mainWindow.openDevTools()
     // otherWindow.openDevTools()
     // }
@@ -56,7 +57,8 @@ app.on('ready', () => {
             provider: "github",
             owner: "Jackie-Tang",
             repo: "electron-react",
-            vPrefixedTagName: false,
+            // vPrefixedTagName: false,
+            token: Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA==')
         })
         
         xxx.logger = require('electron-log')

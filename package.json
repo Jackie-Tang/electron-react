@@ -74,6 +74,7 @@
     "electron-log": "^4.3.2",
     "electron-updater": "^4.3.8",
     "inline-worker": "^1.1.0",
+    "js-base64": "^3.6.0",
     "node-sass": "^5.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

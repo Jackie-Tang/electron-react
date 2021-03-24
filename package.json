@@ -44,7 +44,7 @@
     "dev": "cross-env NODE_ENV=development GH_TOKEN=1111 npm-run-all --parallel bundle serve-dev",
     "build": "cross-env NODE_ENV=production webpack --mode development",
     "build:mac": "npm run build && electron-builder --mac",
-    "publish": "npm run build && electron-builder -p always",
+    "publish": "npm run build && electron-builder --mac --publish=always",
     "build:win": "npm run build && electron-builder --win --x64"
   },
   "author": "Jackie<173.16340417@163.com>",

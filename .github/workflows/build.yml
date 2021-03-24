@@ -43,7 +43,7 @@ jobs:
       # step4: build app for mac/win
       - name: build mac app
         run: |
-            yarn build:mac --publish=never
+            yarn build:mac --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
@@ -67,22 +67,22 @@ jobs:
       #     path: './package/vitevui'
       #   id: package-version
 
-      - name: Read package.json
-        uses: tyankatsu0105/read-package-version-actions@v1
-        id: package-version
+      # - name: Read package.json
+      #   uses: tyankatsu0105/read-package-version-actions@v1
+      #   id: package-version
 
 
 #       # step7: create release
-      - name: Create Release for Tag
-        id: release_tag
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        with:
-          tag_name: ${{ steps.package-version.outputs.version }}
-          release_name: ${{ steps.package-version.outputs.version }}
-          prerelease: true # 是否为预发布版本
-          files: "build/**"
+      # - name: Create Release for Tag
+      #   id: release_tag
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      #   with:
+      #     tag_name: ${{ steps.package-version.outputs.version }}
+      #     release_name: ${{ steps.package-version.outputs.version }}
+      #     prerelease: true # 是否为预发布版本
+      #     files: "build/**"
         
       # - name: release
       #   uses: softprops/action-gh-release@v1

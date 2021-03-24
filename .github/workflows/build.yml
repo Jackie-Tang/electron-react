@@ -43,7 +43,7 @@ jobs:
       # step4: build app for mac/win
       - name: build mac app
         run: |
-            yarn publish
+            yarn build:mac --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 

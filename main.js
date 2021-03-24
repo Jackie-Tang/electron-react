@@ -53,15 +53,16 @@ app.on('ready', () => {
     } else {
         // checkForUpdates();
         const xxx = new MacUpdater({
-            "provider": "github",
-            "owner": "Jackie-Tang",
-            "repo": "electron-react",
-            token: process.env.GH_TOKEN
+            provider: "github",
+            owner: "Jackie-Tang",
+            repo: "electron-react",
+            vPrefixedTagName: false,
         })
-        xxx.checkForUpdatesAndNotify();
+        
         xxx.logger = require('electron-log')
         // 监听输出的日志
         xxx.logger.transports.file.level = 'info'
+        xxx.checkForUpdatesAndNotify();
         // global.currentVersion = autoUpdater.currentVersion
         mainWindow.loadURL(format({
             pathname: path.join(__dirname, 'index.html'),

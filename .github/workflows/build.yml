@@ -30,9 +30,9 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2-beta
 
-      - name: Install Global cross-env
-        run: |
-          yarn global add cross-env
+      # - name: Install Global cross-env
+      #   run: |
+      #     yarn global add cross-env
         
       # step3: npm install
       - name: npm install
@@ -42,7 +42,7 @@ jobs:
       # step4: build app for mac/win
       - name: build mac app
         run: |
-            cross-env GH_TOKEN=${{ secrets.GH_TOKEN }} yarn build:mac
+            yarn build:mac --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 

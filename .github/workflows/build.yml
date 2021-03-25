@@ -40,7 +40,7 @@ jobs:
       - name: build win app
         if: matrix.os == 'windows-2019'
         run: |
-            yarn build:mac --publish=always
+            yarn build:win --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 

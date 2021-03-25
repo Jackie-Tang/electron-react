@@ -1,11 +1,10 @@
 {
   "name": "electron-react-webpack",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Electron + React 16 + Webpack 4 template.",
   "repository": "https://github.com/Jackie-Tang/electron-react.git",
   "main": "main.js",
   "build": {
-    "asar": false,
     "productName": "agroa",
     "appId": "com.jackie.agroa",
     "directories": {
@@ -57,7 +56,7 @@
     "babel-preset-react": "^6.24.1",
     "cross-env": "^6.0.3",
     "css-loader": "^0.28.10",
-    "electron": "10.2.0",
+    "electron": "11.0.0",
     "electron-builder": "22.10.5",
     "electron-notarize": "^1.0.0",
     "electron-reload": "^1.2.2",
@@ -71,7 +70,6 @@
   },
   "dependencies": {
     "agora-access-token": "^2.0.4",
-    "agora-electron-sdk": "3.3.1",
     "electron-log": "^4.3.2",
     "electron-updater": "^4.3.8",
     "inline-worker": "^1.1.0",
@@ -83,7 +81,7 @@
     "style-loader": "^2.0.0"
   },
   "agora_electron": {
-    "electron_version": "10.2.0",
+    "electron_version": "11.0.0",
     "prebuilt": true
   }
 }

@@ -19,7 +19,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-10.15, windows-2019]
+        os: [macos-10.15]
+        # os: [macos-10.15, windows-2019]
 
     # create steps
     steps:
@@ -37,17 +38,17 @@ jobs:
           yarn
 
       # step4: build app for mac/win
-      - name: build win app
-        if: matrix.os == 'windows-2019'
-        run: |
-            yarn build:win --publish=always
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      # - name: build win app
+      #   if: matrix.os == 'windows-2019'
+      #   run: |
+      #       yarn build:win --publish=always
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       
       - name: export code
         if: matrix.os == 'macos-10.15'
         run: |
-          export CSC_LINK=autograph/Syan.p12
+          export CSC_LINK=./autograph/Syan.p12
           export CSC_KEY_PASSWORD=1111
 
       - name: build mac app
@@ -58,11 +59,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       # step5: cleanup artifacts in dist_electron
-      - name: cleanup artifacts for macosZ
-        if: matrix.os == 'windows-2019'
-        run: |
-          npx rimraf "build/!(*.exe)"
-          npx rimraf "build/latest.yml"
+      # - name: cleanup artifacts for macosZ
+      #   if: matrix.os == 'windows-2019'
+      #   run: |
+      #     npx rimraf "build/!(*.exe)"
+      #     npx rimraf "build/latest.yml"
 
       - name: cleanup artifacts for macosZ
         if: matrix.os == 'macos-10.15'

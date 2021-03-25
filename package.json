@@ -24,6 +24,7 @@
       "node_modules/**/*"
     ],
     "mac": {
+      "identity": "Shanghai Jingyue Network Technology Co., Ltd. (TV83A2E2TB)",
       "target": [
         "dmg",
         "zip"

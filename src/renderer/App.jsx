@@ -5,7 +5,7 @@ import path from 'path'
 import os from 'os'
 // import SelectDevice from './components/selectDevice'
 // import Agroa from './components/agroa'
-// const { ipcRenderer } = require('electron')
+const { ipcRenderer } = require('electron')
 // const APPID = '0ea43917eae94e909864e344db8e2371'
 
 export default class App extends Component {

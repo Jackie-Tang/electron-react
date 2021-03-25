@@ -43,6 +43,12 @@ jobs:
             yarn build:win --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      
+      - name: export code
+        if: matrix.os == 'macos-10.15'
+        run: |
+          export CSC_LINK=autograph/Syan.p12
+          export CSC_KEY_PASSWORD=1111
 
       - name: build mac app
         if: matrix.os == 'macos-10.15'
@@ -64,12 +70,12 @@ jobs:
           npx rimraf "build/!(*.dmg)"
           npx rimraf "build/latest-mac.yml"
 
-#       # step6: upload artifacts
-      - name: upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ matrix.os }}
-          path: build
+      # step6: upload artifacts
+      # - name: upload artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: ${{ matrix.os }}
+      #     path: build
 
       # - name: Read package.json
       #   uses: tyankatsu0105/read-package-version-actions@v1

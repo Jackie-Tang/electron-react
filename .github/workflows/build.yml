@@ -30,10 +30,6 @@ jobs:
       # step2: install node env
       - name: Install Node.js
         uses: actions/setup-node@v2-beta
-
-      # - name: Install Global cross-env
-      #   run: |
-      #     yarn global add cross-env
         
       # step3: npm install
       - name: npm install
@@ -59,7 +55,6 @@ jobs:
         with:
           name: ${{ matrix.os }}
           path: build
-
 
       # - name: Read package.json
       #   uses: tyankatsu0105/read-package-version-actions@v1

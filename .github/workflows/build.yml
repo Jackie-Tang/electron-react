@@ -31,11 +31,16 @@ jobs:
       # step2: install node env
       - name: Install Node.js
         uses: actions/setup-node@v2-beta
+
+      - name: sss
+        run: |
+          cd $GITHUB_WORKSPACE
+          ls
         
       # step3: npm install
-      - name: npm install
-        run: |
-          yarn
+      # - name: npm install
+      #   run: |
+      #     yarn
 
       # step4: build app for mac/win
       # - name: build win app
@@ -45,31 +50,31 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       
-      - name: export code
-        if: matrix.os == 'macos-10.15'
-        run: |
-          export CSC_LINK=./Syan.p12
-          export CSC_KEY_PASSWORD=1111
-
-      - name: build mac app
-        if: matrix.os == 'macos-10.15'
-        run: |
-            yarn build:mac --publish=always
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      # step5: cleanup artifacts in dist_electron
-      # - name: cleanup artifacts for macosZ
-      #   if: matrix.os == 'windows-2019'
+      # - name: export code
+      #   if: matrix.os == 'macos-10.15'
       #   run: |
-      #     npx rimraf "build/!(*.exe)"
-      #     npx rimraf "build/latest.yml"
+      #     export CSC_LINK=./Syan.p12
+      #     export CSC_KEY_PASSWORD=1111
 
-      - name: cleanup artifacts for macosZ
-        if: matrix.os == 'macos-10.15'
-        run: |
-          npx rimraf "build/!(*.dmg)"
-          npx rimraf "build/latest-mac.yml"
+      # - name: build mac app
+      #   if: matrix.os == 'macos-10.15'
+      #   run: |
+      #       yarn build:mac --publish=always
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # # step5: cleanup artifacts in dist_electron
+      # # - name: cleanup artifacts for macosZ
+      # #   if: matrix.os == 'windows-2019'
+      # #   run: |
+      # #     npx rimraf "build/!(*.exe)"
+      # #     npx rimraf "build/latest.yml"
+
+      # - name: cleanup artifacts for macosZ
+      #   if: matrix.os == 'macos-10.15'
+      #   run: |
+      #     npx rimraf "build/!(*.dmg)"
+      #     npx rimraf "build/latest-mac.yml"
 
       # step6: upload artifacts
       # - name: upload artifacts

@@ -50,7 +50,10 @@ jobs:
         run: |
           export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
           export CSC_KEY_PASSWORD=1111
-          security find-identity -v -p codesigning
+          echo $CSC_LINK
+          echo $CSC_KEY_PASSWORD
+
+      # security find-identity -v -p codesigning
 
       # - name: build mac app
       #   if: matrix.os == 'macos-10.15'

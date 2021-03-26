@@ -59,6 +59,8 @@ jobs:
           echo "export CSC_KEY_PASSWORD=1111" > ~/.bashrc
           source ~/.bashrc
 
+          echo $CSC_LINK
+
           security find-identity -v -p codesigning
 
       # - name: build mac app

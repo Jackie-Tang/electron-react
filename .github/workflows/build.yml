@@ -44,24 +44,27 @@ jobs:
       #       yarn build:win --publish=always
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      
-      - name: export code
-        if: matrix.os == 'macos-10.15'
-        run: |
-          # export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
+
+      # export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
           # export CSC_KEY_PASSWORD=1111
           # echo $CSC_LINK
           # echo $CSC_KEY_PASSWORD
           # cat $GITHUB_WORKSPACE/cat.txt
           # security find-identity -v -p codesigning
 
-          echo "export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12" > ~/.bashrc
-          echo "export CSC_KEY_PASSWORD=1111" > ~/.bashrc
-          source ~/.bashrc
+          # echo "export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12" > ~/.bashrc
+          # echo "export CSC_KEY_PASSWORD=1111" > ~/.bashrc
+          # source ~/.bashrc
 
-          echo $CSC_LINK
-
+          # echo $CSC_LINK
+      
+      - name: export code
+        if: matrix.os == 'macos-10.15'
+        run: |
           security find-identity -v -p codesigning
+        env:
+          CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
+          CSC_KEY_PASSWORD=1111
 
       # - name: build mac app
       #   if: matrix.os == 'macos-10.15'

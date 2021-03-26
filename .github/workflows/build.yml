@@ -28,7 +28,7 @@ jobs:
       - name: Check out git repository
         uses: actions/checkout@v2
 
-      step2: install node env
+      # step2: install node env
       - name: Install Node.js
         uses: actions/setup-node@v2-beta
         

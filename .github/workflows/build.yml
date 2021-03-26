@@ -28,6 +28,13 @@ jobs:
       - name: Check out git repository
         uses: actions/checkout@v2
 
+      - name: Codesign executable
+        env: 
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+        run: |
+          echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
+
       # step2: install node env
       # - name: Install Node.js
       #   uses: actions/setup-node@v2-beta

@@ -32,10 +32,10 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2-beta
         
-      # step3: npm install
-      - name: npm install
-        run: |
-          yarn
+      # # step3: npm install
+      # - name: npm install
+      #   run: |
+      #     yarn
 
       # step4: build app for mac/win
       # - name: build win app
@@ -66,12 +66,12 @@ jobs:
       #     CSC_LINK: $GITHUB_WORKSPACE/lyg.p12
       #     CSC_KEY_PASSWORD: 1111
 
-      - name: build mac app
-        if: matrix.os == 'macos-10.15'
-        run: |
-            yarn build:mac --publish=always
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      # - name: build mac app
+      #   if: matrix.os == 'macos-10.15'
+      #   run: |
+      #       yarn build:mac --publish=always
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
 
       - name: Codesign executable
@@ -79,12 +79,15 @@ jobs:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
         run: |
-          echo $MACOS_CERTIFICATE | base64 --decode > lyg.p12
+          echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
           security create-keychain -p $MACOS_CERTIFICATE_PWD build.keychain security default-keychain -s build.keychain
           security unlock-keychain -p $MACOS_CERTIFICATE_PWD build.keychain
-          security import lyg.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $MACOS_CERTIFICATE_PWD build.keychain
-          /usr/bin/codesign --force -s lyg $GITHUB_WORKSPACE/build/mac/agroa -v
+          
+        # security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+        # security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $MACOS_CERTIFICATE_PWD build.keychain
+
+
+      # /usr/bin/codesign --force -s lyg $GITHUB_WORKSPACE/build/mac/agroa -v
 
 
       # step5: cleanup artifacts in dist_electron

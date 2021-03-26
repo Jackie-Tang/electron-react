@@ -48,11 +48,17 @@ jobs:
       - name: export code
         if: matrix.os == 'macos-10.15'
         run: |
-          sudo export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
-          sudo export CSC_KEY_PASSWORD=1111
-          echo $CSC_LINK
-          echo $CSC_KEY_PASSWORD
-          cat $GITHUB_WORKSPACE/cat.txt
+          # export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
+          # export CSC_KEY_PASSWORD=1111
+          # echo $CSC_LINK
+          # echo $CSC_KEY_PASSWORD
+          # cat $GITHUB_WORKSPACE/cat.txt
+          # security find-identity -v -p codesigning
+
+          echo "export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12" > ~/.bashrc
+          echo "export CSC_KEY_PASSWORD=1111" > ~/.bashrc
+          source ~/.bashrc
+
           security find-identity -v -p codesigning
 
       # - name: build mac app

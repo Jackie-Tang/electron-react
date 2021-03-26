@@ -79,12 +79,12 @@ jobs:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
         run: |
-          echo $MACOS_CERTIFICATE | base64 --decode > lyg.p12
-          security create-keychain -p $MACOS_CERTIFICATE_PWD lyg.keychain security default-keychain -s lyg.keychain
-          security unlock-keychain -p $MACOS_CERTIFICATE_PWD lyg.keychain
-          security import lyg.p12 -k lyg.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $MACOS_CERTIFICATE_PWD lyg.keychain
-          /usr/bin/codesign --force -s lyg $GITHUB_WORKSPACE/build/mac/agroa -v
+          echo $MACOS_CERTIFICATE | base64 --decode > lyg2.p12
+          security create-keychain -p $MACOS_CERTIFICATE_PWD lyg2.keychain security default-keychain -s lyg2.keychain
+          security unlock-keychain -p $MACOS_CERTIFICATE_PWD lyg2.keychain
+          security import lyg2.p12 -k lyg2.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $MACOS_CERTIFICATE_PWD lyg2.keychain
+          /usr/bin/codesign --force -s lyg2 $GITHUB_WORKSPACE/build/mac/agroa -v
 
 
       # step5: cleanup artifacts in dist_electron

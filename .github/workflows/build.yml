@@ -52,6 +52,7 @@ jobs:
           export CSC_KEY_PASSWORD=1111
           echo $CSC_LINK
           echo $CSC_KEY_PASSWORD
+          cat $GITHUB_WORKSPACE/cat.txt
 
       # security find-identity -v -p codesigning
 

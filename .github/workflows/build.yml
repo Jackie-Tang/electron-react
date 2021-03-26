@@ -47,13 +47,13 @@ jobs:
 
       - name: cd
         run: |
-          cd $GITHUB_WORKSPACE/autograph & ls
+          cd $GITHUB_WORKSPACE & ls & cat $GITHUB_WORKSPACE/lyg.p12
       
       
       # - name: export code
       #   if: matrix.os == 'macos-10.15'
       #   run: |
-      #     export CSC_LINK=$GITHUB_WORKSPACE/autograph/lyg.p12
+      #     export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
       #     export CSC_KEY_PASSWORD=1111
       #     cd $GITHUB_WORKSPACE/autograph
       #     ls

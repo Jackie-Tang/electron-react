@@ -29,13 +29,13 @@ jobs:
         uses: actions/checkout@v2
 
       # step2: install node env
-      - name: Install Node.js
-        uses: actions/setup-node@v2-beta
+      # - name: Install Node.js
+      #   uses: actions/setup-node@v2-beta
         
-      # step3: npm install
-      - name: npm install
-        run: |
-          yarn
+      # # step3: npm install
+      # - name: npm install
+      #   run: |
+      #     yarn
 
       # step4: build app for mac/win
       # - name: build win app
@@ -50,13 +50,14 @@ jobs:
         run: |
           export CSC_LINK=$GITHUB_WORKSPACE/autograph/lyg.p12
           export CSC_KEY_PASSWORD=1111
+          security find-identity -v -p codesigning
 
-      - name: build mac app
-        if: matrix.os == 'macos-10.15'
-        run: |
-            yarn build:mac --publish=always
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      # - name: build mac app
+      #   if: matrix.os == 'macos-10.15'
+      #   run: |
+      #       yarn build:mac --publish=always
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       # step5: cleanup artifacts in dist_electron
       # - name: cleanup artifacts for macosZ
@@ -65,11 +66,11 @@ jobs:
       #     npx rimraf "build/!(*.exe)"
       #     npx rimraf "build/latest.yml"
 
-      - name: cleanup artifacts for macosZ
-        if: matrix.os == 'macos-10.15'
-        run: |
-          npx rimraf "build/!(*.dmg)"
-          npx rimraf "build/latest-mac.yml"
+      # - name: cleanup artifacts for macosZ
+      #   if: matrix.os == 'macos-10.15'
+      #   run: |
+      #     npx rimraf "build/!(*.dmg)"
+      #     npx rimraf "build/latest-mac.yml"
 
       # step6: upload artifacts
       # - name: upload artifacts

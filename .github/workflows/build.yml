@@ -79,10 +79,10 @@ jobs:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
         run: |
-          echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
+          echo $MACOS_CERTIFICATE | base64 --decode > lyg1.p12
           security create-keychain -p 1111 build.keychain security default-keychain -s build.keychain
           security unlock-keychain -p 1111 build.keychain
-          security import certificate.p12 -k build.keychain -P 1111 -T /usr/bin/codesign
+          security import lyg1.p12 -k build.keychain -P 1111 -T /usr/bin/codesign
         # security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $MACOS_CERTIFICATE_PWD build.keychain
 
 

@@ -44,20 +44,13 @@ jobs:
       #       yarn build:win --publish=always
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      - name: cd
+      
+      - name: export code
+        if: matrix.os == 'macos-10.15'
         run: |
-          cd $GITHUB_WORKSPACE & ls & cat $GITHUB_WORKSPACE/lyg.p12
-      
-      
-      # - name: export code
-      #   if: matrix.os == 'macos-10.15'
-      #   run: |
-      #     export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
-      #     export CSC_KEY_PASSWORD=1111
-      #     cd $GITHUB_WORKSPACE/autograph
-      #     ls
-      #     security find-identity -v -p codesigning
+          export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
+          export CSC_KEY_PASSWORD=1111
+          security find-identity -v -p codesigning
 
       # - name: build mac app
       #   if: matrix.os == 'macos-10.15'

@@ -53,8 +53,7 @@ jobs:
           echo $CSC_LINK
           echo $CSC_KEY_PASSWORD
           cat $GITHUB_WORKSPACE/cat.txt
-
-      # security find-identity -v -p codesigning
+          security find-identity -v -p codesigning
 
       # - name: build mac app
       #   if: matrix.os == 'macos-10.15'

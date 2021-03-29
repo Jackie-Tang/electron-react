@@ -76,7 +76,7 @@ function createWindow() {
 	});
 }
 
-app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096');
+app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096000');
 
 app.on('ready', () => {
 	console.log('process.env.GITHUB_TOKEN', Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA=='))

@@ -1,6 +1,6 @@
 {
   "name": "electron-react-webpack",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Electron + React 16 + Webpack 4 template.",
   "repository": "https://github.com/Jackie-Tang/electron-react.git",
   "main": "main.js",
@@ -36,7 +36,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "runAfterFinish": true
+      "runAfterFinish": true,
+      "differentialPackage": false
     },
     "win": {
       "target": [

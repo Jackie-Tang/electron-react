@@ -1,6 +1,6 @@
 {
   "name": "electron-react-webpack",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Electron + React 16 + Webpack 4 template.",
   "repository": "https://github.com/Jackie-Tang/electron-react.git",
   "main": "main.js",
@@ -60,6 +60,7 @@
     "electron-builder": "22.10.5",
     "electron-notarize": "^1.0.0",
     "electron-reload": "^1.2.2",
+    "electron-squirrel-startup": "^1.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.10",
     "npm-run-all": "^4.1.2",

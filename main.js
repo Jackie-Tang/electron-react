@@ -1,4 +1,6 @@
 // Basic init
+if(require('electron-squirrel-startup')) return;
+
 const electron = require('electron')
 const { app, BrowserWindow, ipcMain } = electron
 const { format } = require('url')

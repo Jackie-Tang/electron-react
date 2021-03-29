@@ -19,8 +19,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-10.15]
-        # os: [macos-10.15, windows-2019]
+        # os: [macos-10.15]
+        os: [windows-2019]
 
     # create steps
     steps:
@@ -37,13 +37,13 @@ jobs:
         run: |
           yarn
 
-      # step4: build app for mac/win
-      # - name: build win app
-      #   if: matrix.os == 'windows-2019'
-      #   run: |
-      #       yarn build:win --publish=always
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      step4: build app for mac/win
+      - name: build win app
+        if: matrix.os == 'windows-2019'
+        run: |
+            yarn build:win --publish=always
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       # export CSC_LINK=$GITHUB_WORKSPACE/lyg.p12
       # export CSC_KEY_PASSWORD=1111
@@ -74,17 +74,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
 
-      - name: Codesign executable
-        env: 
-          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
-          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
-        run: |
-          echo $MACOS_CERTIFICATE | base64 --decode > lyg2.p12
-          security create-keychain -p $MACOS_CERTIFICATE_PWD lyg2.keychain security default-keychain -s lyg2.keychain
-          security unlock-keychain -p $MACOS_CERTIFICATE_PWD lyg2.keychain
-          security import lyg2.p12 -k lyg2.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $MACOS_CERTIFICATE_PWD lyg2.keychain
-          /usr/bin/codesign --force -s lyg2 $GITHUB_WORKSPACE/build/mac/agroa -v
+      # - name: Codesign executable
+      #   env: 
+      #     MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+      #     MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+      #   run: |
+      #     echo $MACOS_CERTIFICATE | base64 --decode > lyg2.p12
+      #     security create-keychain -p $MACOS_CERTIFICATE_PWD lyg2.keychain security default-keychain -s lyg2.keychain
+      #     security unlock-keychain -p $MACOS_CERTIFICATE_PWD lyg2.keychain
+      #     security import lyg2.p12 -k lyg2.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+      #     security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $MACOS_CERTIFICATE_PWD lyg2.keychain
+      #     /usr/bin/codesign --force -s lyg2 $GITHUB_WORKSPACE/build/mac/agroa -v
 
 
       # step5: cleanup artifacts in dist_electron

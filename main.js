@@ -1,13 +1,12 @@
 // Basic init
-if(require('electron-squirrel-startup')) return;
-
 const electron = require('electron')
 const { app, BrowserWindow, ipcMain } = electron
 const { format } = require('url')
 const path = require('path')
 const { Base64 } = require('js-base64');
+const os = require('os');
 // const AppUpdater = require('./updater');
-const { MacUpdater } = require('electron-updater');
+const { MacUpdater, NsisUpdater } = require('electron-updater');
 
 const isDevelopment = process.env["NODE_ENV"] === "development"
 
@@ -38,14 +37,21 @@ function createWindow() {
 	} else {
 		mainWindow.once('ready-to-show', () => {
 			console.log('autoUpdater')
-			const autoUpdater = new MacUpdater({
+			const sys = os.type().toUpperCase();
+			let autoUpdater;
+			const opt = {
 				provider: "github",
 				owner: "Jackie-Tang",
 				repo: "electron-react",
 				vPrefixedTagName: false,
 				releaseType: 'release',
-				token: Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA==')
-			})
+				token: Base64.decode('MGUyZjk0ZWUxZDc3OTgyZGVjM2M4ZDZmNWUxZWUwNmZkY2VlZTkxNA=='),
+			};
+			if (sys === 'DARWIN') {
+				autoUpdater = new MacUpdater(opt)
+			} else if (sys === 'WINDOW_NT') {
+				autoUpdater = new NsisUpdater(opt)
+			}
 			autoUpdater.logger = require('electron-log')
 			// 监听输出的日志
 			autoUpdater.logger.transports.file.level = 'info'

@@ -73,6 +73,7 @@
     "agora-access-token": "^2.0.4",
     "electron-log": "^4.3.2",
     "electron-updater": "^4.3.8",
+    "electron-winstaller": "^5.0.0",
     "inline-worker": "^1.1.0",
     "js-base64": "^3.6.0",
     "node-sass": "^5.0.0",

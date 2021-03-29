@@ -37,7 +37,7 @@ jobs:
         run: |
           yarn
 
-      step4: build app for mac/win
+      # step4: build app for mac/win
       - name: build win app
         if: matrix.os == 'windows-2019'
         run: |

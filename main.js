@@ -49,14 +49,14 @@ function createWindow() {
 			};
 			if (sys === 'DARWIN') {
 				autoUpdater = new MacUpdater(opt)
-			} else if (sys === 'WINDOW_NT') {
+			} else if (sys === 'WINDOWS_NT') {
 				autoUpdater = new NsisUpdater(opt)
 			}
-			// if (autoUpdater.logger) {
-			// 	autoUpdater.logger = require('electron-log')
-			// 	// 监听输出的日志
-			// 	autoUpdater.logger.transports.file.level = 'info'
-			// }
+			if (autoUpdater.logger) {
+				autoUpdater.logger = require('electron-log')
+				// 监听输出的日志
+				autoUpdater.logger.transports.file.level = 'info'
+			}
 			autoUpdater.checkForUpdatesAndNotify();
 			autoUpdater.on('update-available', () => {
 				mainWindow.webContents.send('update_available');

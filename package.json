@@ -29,10 +29,26 @@
         "zip"
       ]
     },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "./src/renderer/assets/agroa.ico",
+      "uninstallerIcon": "./src/renderer/assets/agroa.ico",
+      "installerHeaderIcon": "./src/renderer/assets/agroa.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "shortcutName": "agroa-ico"
+    },
     "win": {
+      "icon": "./src/renderer/assets/agroa.ico",
       "target": [
-        "nsis",
-        "zip"
+        "nsis"
+      ],
+      "arch": [
+        "x64"
       ]
     }
   },

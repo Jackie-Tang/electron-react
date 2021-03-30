@@ -1,6 +1,6 @@
 {
   "name": "electron-react-webpack",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Electron + React 16 + Webpack 4 template.",
   "repository": "https://github.com/Jackie-Tang/electron-react.git",
   "main": "main.js",
@@ -37,13 +37,14 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "runAfterFinish": true,
-      "differentialPackage": false
+      "installerIcon": "./src/renderer/assets/agroa.ico",
+      "uninstallerIcon": "./src/renderer/assets/agroa.ico",
+      "installerHeaderIcon": "./src/renderer/assets/agroa.ico",
+      "shortcutName": "agroa-ico",
+      "differentialPackage": true
     },
     "win": {
-      "target": [
-        "nsis",
-        "zip"
-      ]
+      "target": [ "nsis" ]
     }
   },
   "scripts": {
